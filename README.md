@@ -12,4 +12,43 @@ This is a minimal Next.js demo DApp for interacting with a Solana on-chain "Hell
 - See logs output by your program
 - All RPC requests are securely proxied via a Next.js API route to protect your Alchemy API key
 
+## Required configuration
+
+Create `.env.local` in the project root:
+
+```bash
+NEXT_PUBLIC_PROGRAM_ID=<YOUR_SOLANA_PROGRAM_PUBLIC_KEY>
+ALCHEMY_API_URL_SOLANA_DEVNET=<YOUR_ALCHEMY_SOLANA_DEVNET_RPC_URL>
+```
+
+Optional fallback env vars supported by the RPC proxy route:
+
+```bash
+ALCHEMY_API_URL=<DEFAULT_RPC_URL>
+ALCHEMY_API_URL_SOLANA_MAINNET=<MAINNET_RPC_URL>
+ALCHEMY_API_URL_SOLANA_TESTNET=<TESTNET_RPC_URL>
+```
+
+### What each value is used for
+
+- `NEXT_PUBLIC_PROGRAM_ID`: Program public key invoked by the frontend ping transaction.
+- `ALCHEMY_API_URL_SOLANA_DEVNET`: Upstream Solana devnet RPC used by `POST /api/rpc`.
+- `ALCHEMY_API_URL`: Generic fallback if a chain-specific URL is not set.
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Then open `http://localhost:3000`.
+
+## Scripts
+
+- `npm run dev` - Start the Next.js development server
+- `npm run build` - Build for production
+- `npm run start` - Start the production server
+- `npm run lint` - Run ESLint
+
 _Note:_ This app is meant for demo/educational purposes and uses client-side wallet connections only. See the source code for details on how transactions are built and sent with `@solana/web3.js` and how the Alchemy API proxy is implemented.
